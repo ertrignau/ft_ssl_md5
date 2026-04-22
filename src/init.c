@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:44:22 by eric              #+#    #+#             */
-/*   Updated: 2026/04/22 15:41:56 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/22 16:17:56 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	init_md5_struct(t_md5 *md5)
 	md5->C = 0x98badcfe;
 	md5->D = 0x10325476;
 	md5->bit_len = 0;
-	memset(md5->buffer, 0, 64);
+	md5->buffer_len = 0;
+	ft_memset(md5->buffer, 0, 64);
 }
-
