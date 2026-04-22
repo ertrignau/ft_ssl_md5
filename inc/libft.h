@@ -1,43 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ssl.h                                              :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 14:43:48 by eric              #+#    #+#             */
-/*   Updated: 2026/04/22 15:47:00 by eric             ###   ########.fr       */
+/*   Created: 2026/04/16 11:15:05 by eric              #+#    #+#             */
+/*   Updated: 2026/04/22 15:47:10 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SSL_H
-#define SSL_H
-
-#include "libft.h"
+#ifndef LIBFT_H
+#define LIBFT_H
 
 #include <stdio.h>
-#include <stdint.h>
 #include <unistd.h>
+#include <stdlib.h>
 
-typedef struct s_md5
-{
-	uint32_t	A;
-	uint32_t	B;
-	uint32_t	C;
-	uint32_t	D;
-	uint64_t	bit_len;
-	uint8_t		buffer[64];
-} t_md5;
-
-/*INIT*/
-void	init_md5_struct(t_md5 *md5);
-
-/*PARSING*/
-
-/*PADDING*/
-
-/*ALGO*/
-
-/*UTILS*/
+int		ft_atoi(const char *str);
+int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strdup(const char *src);
+int		ft_strlen(const char *str);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+int		ft_memcmp(const void *ptr, const	void *ptr2, size_t num);
+void	*ft_memset(void *ptr, int value, size_t len);
 
 #endif

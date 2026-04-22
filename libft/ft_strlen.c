@@ -1,43 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ssl.h                                              :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 14:43:48 by eric              #+#    #+#             */
-/*   Updated: 2026/04/22 15:47:00 by eric             ###   ########.fr       */
+/*   Created: 2026/04/16 14:02:02 by eric              #+#    #+#             */
+/*   Updated: 2026/04/16 14:03:37 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SSL_H
-#define SSL_H
-
 #include "libft.h"
 
-#include <stdio.h>
-#include <stdint.h>
-#include <unistd.h>
-
-typedef struct s_md5
+int	ft_strlen(const char *str)
 {
-	uint32_t	A;
-	uint32_t	B;
-	uint32_t	C;
-	uint32_t	D;
-	uint64_t	bit_len;
-	uint8_t		buffer[64];
-} t_md5;
+	int	i;
 
-/*INIT*/
-void	init_md5_struct(t_md5 *md5);
-
-/*PARSING*/
-
-/*PADDING*/
-
-/*ALGO*/
-
-/*UTILS*/
-
-#endif
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}

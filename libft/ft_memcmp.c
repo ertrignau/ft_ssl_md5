@@ -1,43 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ssl.h                                              :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 14:43:48 by eric              #+#    #+#             */
-/*   Updated: 2026/04/22 15:47:00 by eric             ###   ########.fr       */
+/*   Created: 2026/04/22 11:40:11 by eric              #+#    #+#             */
+/*   Updated: 2026/04/22 11:50:11 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SSL_H
-#define SSL_H
-
 #include "libft.h"
 
-#include <stdio.h>
-#include <stdint.h>
-#include <unistd.h>
-
-typedef struct s_md5
+int	ft_memcmp(const void *ptr, const	void *ptr2, size_t num)
 {
-	uint32_t	A;
-	uint32_t	B;
-	uint32_t	C;
-	uint32_t	D;
-	uint64_t	bit_len;
-	uint8_t		buffer[64];
-} t_md5;
+	size_t			i;
+	unsigned char	*p1;
+	unsigned char	*p2;
 
-/*INIT*/
-void	init_md5_struct(t_md5 *md5);
-
-/*PARSING*/
-
-/*PADDING*/
-
-/*ALGO*/
-
-/*UTILS*/
-
-#endif
+	i = 0;
+	p1 = (unsigned char *)ptr;
+	p2 = (unsigned char *)ptr2;
+	while (i < num)
+	{
+		if (p1[i] < p2[i])
+			return (-1);
+		else if (p1[i] > p2[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}

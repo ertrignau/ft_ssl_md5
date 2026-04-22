@@ -1,43 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ssl.h                                              :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 14:43:48 by eric              #+#    #+#             */
-/*   Updated: 2026/04/22 15:47:00 by eric             ###   ########.fr       */
+/*   Created: 2026/04/16 11:15:28 by eric              #+#    #+#             */
+/*   Updated: 2026/04/16 11:15:31 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SSL_H
-#define SSL_H
-
 #include "libft.h"
 
-#include <stdio.h>
-#include <stdint.h>
-#include <unistd.h>
-
-typedef struct s_md5
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	uint32_t	A;
-	uint32_t	B;
-	uint32_t	C;
-	uint32_t	D;
-	uint64_t	bit_len;
-	uint8_t		buffer[64];
-} t_md5;
+	size_t			i;
+	unsigned char	*d;
+	const char		*s;
 
-/*INIT*/
-void	init_md5_struct(t_md5 *md5);
-
-/*PARSING*/
-
-/*PADDING*/
-
-/*ALGO*/
-
-/*UTILS*/
-
-#endif
+	i = 0;
+	d = (unsigned char *)dest;
+	s = (const char *)src;
+	if (!dest && !src)
+		return (NULL);
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dest);
+}

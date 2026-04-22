@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ssl.h                                              :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 14:43:48 by eric              #+#    #+#             */
-/*   Updated: 2026/04/22 15:47:00 by eric             ###   ########.fr       */
+/*   Created: 2026/04/16 13:48:28 by eric              #+#    #+#             */
+/*   Updated: 2026/04/16 13:48:31 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SSL_H
-#define SSL_H
-
 #include "libft.h"
 
-#include <stdio.h>
-#include <stdint.h>
-#include <unistd.h>
-
-typedef struct s_md5
+char	*ft_strdup(const char *src)
 {
-	uint32_t	A;
-	uint32_t	B;
-	uint32_t	C;
-	uint32_t	D;
-	uint64_t	bit_len;
-	uint8_t		buffer[64];
-} t_md5;
+	char	*dest;
+	size_t	i;
 
-/*INIT*/
-void	init_md5_struct(t_md5 *md5);
-
-/*PARSING*/
-
-/*PADDING*/
-
-/*ALGO*/
-
-/*UTILS*/
-
-#endif
+	dest = malloc(sizeof(char) * (ft_strlen(src) + 1));
+	if (!dest)
+		return (NULL);
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
