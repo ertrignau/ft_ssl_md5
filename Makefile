@@ -27,7 +27,7 @@ OBJ_DIR		:= obj
 INC_DIR		:= inc
 
 # Files
-TARGET		:= ft_ssl_md5
+TARGET		:= ft_ssl
 SRC_FILES	:= main.c init.c md5_algo.c padding.c parsing.c utils.c
 LIBFT_FILES	:= ft_atoi.c ft_memcmp.c ft_memcpy.c ft_memset.c ft_strcmp.c ft_strdup.c ft_strlen.c
 
