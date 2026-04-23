@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 15:15:44 by eric              #+#    #+#             */
-/*   Updated: 2026/04/22 17:07:15 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/23 11:23:24 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 uint8_t	*md5_padding(char *msg, size_t len, size_t *new_len)
 {
-	uint8_t	*buffer;
-	uint8_t	bits;
-	size_t	j;
+	uint8_t		*buffer;
+	uint64_t	bits;
+	size_t		j;
 
 	*new_len = len + 1;
 	while (*new_len % 64 != 56)
@@ -30,7 +30,8 @@ uint8_t	*md5_padding(char *msg, size_t len, size_t *new_len)
 	buffer[len] = 0x80;
 	for (j = len + 1; j < *new_len - 8; j++) // -> remplir le reste de 0
 		buffer[j] = 0;
-	bits = len * 8;
-	ft_memcpy(buffer + *new_len - 8, &bits, 8);
+	bits = (uint64_t) len * 8;
+	for (int i = 0; i < 8; i++)
+		buffer[*new_len - 8 + i] = (bits >> (8 * i)) & 0xff;
 	return (buffer);
 }
