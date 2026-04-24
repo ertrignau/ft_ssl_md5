@@ -6,21 +6,28 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:13:53 by eric              #+#    #+#             */
-/*   Updated: 2026/04/24 15:15:24 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/24 16:08:24 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ssl.h"
 
-int md5_engine(int ac, char **av)
+int	md5_engine(int ac, char **av)
 {
 	int	i;
+	char *input;
 	
+	input = NULL;
 	i = 2;
 	if (ac == 2)
 	{
-		read_stdin();
-		return (0);
+		input = read_stdin();
+    	if (input)
+    	{
+        	md5_string(input);
+        	free(input);
+    	}
+    	return (0);
 	}
 	while (i < ac)
 	{
@@ -31,9 +38,16 @@ int md5_engine(int ac, char **av)
 				md5_string(av[i]);
 		}
 		else if (ft_strcmp(av[i], "-p") == 0)
-			read_stdin();
+		{
+			input = read_stdin();
+    		if (input)
+    		{
+        		md5_string(input);
+        		free(input);
+    		}
+		}
 		else
-			md5_string(av[i]); // file ou string simple (phase 1)
+			md5_string(av[i]);
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 15:15:23 by eric              #+#    #+#             */
-/*   Updated: 2026/04/24 14:13:16 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/24 15:46:06 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	md5_string(char *str)
 	buffer = md5_padding(str, len, &new_len);
 	if (!buffer)
 		return ;
-	
 	init_md5_struct(&ctx);
 	for (size_t i = 0; i < new_len; i += 64)
 		md5_process_block(buffer + i, &ctx);
