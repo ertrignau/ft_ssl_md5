@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 15:15:23 by eric              #+#    #+#             */
-/*   Updated: 2026/04/24 15:46:06 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/27 16:41:58 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,11 @@ void	print_md5(t_md5 ctx)
 	printf("\n");
 }
 
-void	md5_string(char *str)
+void	print_sha256(t_sha256 ctx)
 {
-	t_md5 	ctx;
-	uint8_t	*buffer;
-	size_t	len;
-	size_t new_len;
-
-	len = ft_strlen(str);
-	buffer = md5_padding(str, len, &new_len);
-	if (!buffer)
-		return ;
-	init_md5_struct(&ctx);
-	for (size_t i = 0; i < new_len; i += 64)
-		md5_process_block(buffer + i, &ctx);
-	print_md5(ctx);
-	free (buffer);
+    for (int i = 0; i < 8; i++)
+        printf("%08x", ctx.state[i]);
+    printf("\n");
 }
 
 char	*read_stdin()

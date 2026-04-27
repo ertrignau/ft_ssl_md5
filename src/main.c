@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:44:25 by eric              #+#    #+#             */
-/*   Updated: 2026/04/24 15:06:49 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/27 17:19:34 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ int main(int ac, char **av)
     t_env env;
 
     if (parse_arguments(ac, av, &env))
-        return (1);
-    if (env.algo == MD5)
-        md5_engine(ac, av);
-    else
-        printf("SHA256 not ready\n");
-    return (0);
+	{
+		return (1);	
+	}
+	engine(&env, ac, av);
+	return (0);
 }
