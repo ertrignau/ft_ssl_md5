@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:43:48 by eric              #+#    #+#             */
-/*   Updated: 2026/04/27 17:18:26 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/28 15:48:50 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,19 @@ typedef enum e_algo
 typedef struct s_env
 {
     t_algo  algo;
+	int		p;
+	int		q;
+	int		r;
+	int		s;
 } t_env;
+
+typedef void (*t_flag_func)(t_env *, char **, int *);
+
+typedef struct s_flag_map
+{
+	char *flag;
+	t_flag_func func;
+} t_flag_map;
 
 typedef struct s_md5
 {
@@ -62,6 +74,9 @@ typedef struct	s_sha256
 	uint64_t	bitlen;
 	size_t		bufferlen;
 } t_sha256;
+
+typedef void (*t_hash_func)(char *);
+extern t_flag_map g_flags[];
 
 /*INIT*/
 void		init_md5_struct(t_md5 *md5);
@@ -85,7 +100,10 @@ void		sha256_process_block(uint8_t *block, t_sha256 *sha256);
 void		sha256_string(char *str);
 
 /*ENGINE*/
-// int 		md5_engine(int ac, char **av);
+void		handle_p(t_env *env, char *av[], int *i);
+void		handle_s(t_env *env, char *av[], int *i);
+void		handle_default(t_env *env, char *av);
+int			dispatch_flag(t_env *env, char *av[], int *i);
 int			engine(t_env *env, int ac, char *av[]);
 
 /*UTILS*/

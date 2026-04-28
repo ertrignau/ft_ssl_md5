@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:44:27 by eric              #+#    #+#             */
-/*   Updated: 2026/04/24 15:16:08 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/28 15:39:09 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void print_help()
 {
-	printf("Usage: ft_ssl [algo] [flags] [file/string/stdin]\n");
-	printf("Algo: md5 or sha256\n");
+	printf("Usage: ft_ssl [md5 | sha256] [flags] [file/string/stdin]\n");
 	printf("Flags: -p -q -r -s -h\n");
 }
 

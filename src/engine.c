@@ -6,105 +6,84 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:13:53 by eric              #+#    #+#             */
-/*   Updated: 2026/04/27 17:18:36 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/28 15:47:10 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ssl.h"
 
-// int	md5_engine(int ac, char **av)
-// {
-// 	int	i;
-// 	char *input;
+static t_hash_func g_hash_funcs[2] = {
+	md5_string,
+	sha256_string
+};
+
+t_flag_map g_flags[] = {
+	{"-p", handle_p},
+	{"-s", handle_s},
+	{NULL, NULL}
+};
+
+void	handle_p(t_env *env, char *av[], int *i)
+{
+	(void)av;
+	(void)i;
+	char *input = read_stdin();
+	if (input)
+	{
+		g_hash_funcs[env->algo](input);
+		free(input);
+	}
+}
+
+void	handle_s(t_env *env, char *av[], int *i)
+{
+	(*i)++;
+	if (av[*i])
+	{
+		env->s = 1;
+		g_hash_funcs[env->algo](av[*i]);
+	}
+}
+
+void	handle_default(t_env *env, char *av)
+{
+	g_hash_funcs[env->algo](av);
+}
+
+int		dispatch_flag(t_env *env, char *av[], int *i)
+{
+	int j = 0;
 	
-// 	input = NULL;
-// 	i = 2;
-// 	if (ac == 2)
-// 	{
-// 		input = read_stdin();
-//     	if (input)
-//     	{
-//         	md5_string(input);
-//         	free(input);
-//     	}
-//     	return (0);
-// 	}
-// 	while (i < ac)
-// 	{
-// 		if (ft_strcmp(av[i], "-s") == 0)
-// 		{
-// 			i++;
-// 			if (i < ac)
-// 				md5_string(av[i]);
-// 		}
-// 		else if (ft_strcmp(av[i], "-p") == 0)
-// 		{
-// 			input = read_stdin();
-//     		if (input)
-//     		{
-//         		md5_string(input);
-//         		free(input);
-//     		}
-// 		}
-// 		else
-// 			md5_string(av[i]);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+	while (g_flags[j].flag)
+	{
+		if (!ft_strcmp(av[*i], g_flags[j].flag))
+		{
+			g_flags[j].func(env, av, i);
+			return (1);
+		}
+		j++;
+	}
+	return (0);
+}
 
 int engine(t_env *env, int ac, char *av[])
 {
 	int i = 2;
-	char *input;
-
+	
 	if (ac == 2)
 	{
-		input = read_stdin();
-		if (input)
-		{
-			if (env->algo == MD5)
-				md5_string(input);
-			else
-				sha256_string(input);
-			free(input);
-		}
+		handle_p(env, av, &i); // stdin only
 		return (0);
 	}
-
+	
 	while (i < ac)
 	{
-		if (ft_strcmp(av[i], "-s") == 0)
+		if (av[i][0] == '-' && dispatch_flag(env, av, &i))
 		{
 			i++;
-			if (i < ac)
-			{
-				if (env->algo == MD5)
-					md5_string(av[i]);
-				else
-					sha256_string(av[i]);
-			}
+			continue;
 		}
-		else if (ft_strcmp(av[i], "-p") == 0)
-		{
-			input = read_stdin();
-			if (input)
-			{
-				if (env->algo == MD5)
-					md5_string(input);
-				else
-					sha256_string(input);
-				free(input);
-			}
-		}
-		else
-		{
-			// pour l’instant on traite comme string
-			if (env->algo == MD5)
-				md5_string(av[i]);
-			else
-				sha256_string(av[i]);
-		}
+		handle_default(env, av[i]);
 		i++;
 	}
 	return (0);
