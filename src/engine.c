@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:13:53 by eric              #+#    #+#             */
-/*   Updated: 2026/04/28 15:47:10 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/29 15:38:29 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static t_hash_func g_hash_funcs[2] = {
 t_flag_map g_flags[] = {
 	{"-p", handle_p},
 	{"-s", handle_s},
+	// {"-q", handle_q},
 	{NULL, NULL}
 };
 
@@ -45,9 +46,24 @@ void	handle_s(t_env *env, char *av[], int *i)
 	}
 }
 
+// void	handle_q(t_env *env, char *av[], int *i)
+// {
+	
+// }
+
 void	handle_default(t_env *env, char *av)
 {
-	g_hash_funcs[env->algo](av);
+	char *content;
+	
+	content = open_file(av);
+	if (content)
+	{
+		g_hash_funcs[env->algo](content);
+		free(content);
+	}
+	// g_hash_funcs[env->algo](av);
+	else
+		fprintf(stderr, "Error: ft_ssl cannot open %s file\n", av);
 }
 
 int		dispatch_flag(t_env *env, char *av[], int *i)

@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:44:27 by eric              #+#    #+#             */
-/*   Updated: 2026/04/28 15:39:09 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/29 11:07:40 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 void print_help()
 {
 	printf("Usage: ft_ssl [md5 | sha256] [flags] [file/string/stdin]\n");
-	printf("Flags: -p -q -r -s -h\n");
+	printf("Flags:\n");
+	printf("\t-p : echo STDIN to STDOUT and append the checksum to STDOUT\n");
+	printf("\t-q : quiet mode\n");
+	printf("\t-r : reverse the format of the output\n");
+	printf("\t-s : print the sum of the given string\n");
 }
 
 int	parse_arguments(int ac, char *av[], t_env *env)

@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 15:15:23 by eric              #+#    #+#             */
-/*   Updated: 2026/04/27 16:41:58 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/29 15:40:33 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,37 @@ char	*read_stdin()
 	if (input)
 		input[total]= '\0';
 	return (input);
+}
+
+char *open_file(const char *filename)
+{
+	char	buffer[1024];
+	int		fd;
+	size_t	total;
+	ssize_t	r;
+	char	*content;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	total = 0;
+	content = NULL;
+	while ((r = read(fd, buffer, 1024)) > 0)
+	{
+		char *new = malloc(total + r + 1);
+		if (!new)
+			return (NULL);
+		if (content)
+		{
+			ft_memcpy(new, content, total);
+			free(content);
+		}
+		ft_memcpy(new + total, buffer, r);
+		total += r;
+		content = new;
+	}
+	close (fd);
+	if (content)
+		content[total] = '\0';
+	return (content);
 }

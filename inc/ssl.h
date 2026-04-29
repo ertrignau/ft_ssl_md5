@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:43:48 by eric              #+#    #+#             */
-/*   Updated: 2026/04/28 15:48:50 by eric             ###   ########.fr       */
+/*   Updated: 2026/04/29 14:36:20 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 typedef enum e_algo
 {
@@ -108,6 +109,7 @@ int			engine(t_env *env, int ac, char *av[]);
 
 /*UTILS*/
 char		*read_stdin();
+char 		*open_file(const char *filename);
 void		print_md5(t_md5 ctx);
 void 		print_sha256(t_sha256 ctx);
 
